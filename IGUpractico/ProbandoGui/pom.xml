@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Ajusta estos datos si deseas otro identificador -->
+	<groupId>com.mauricio.probandogui</groupId>
+	<artifactId>ProbandoGui</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>ProbandoGui</name>
+	<description>Aplicación Java Swing de ejemplo (Pantalla / ProbandoGui)</description>
+	<url>https://example.com/placeholder</url>
+
+	<properties>
+		<!-- Ajusta la versión de Java según tu JDK instalado (8, 11, 17, etc.) -->
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- No se requieren dependencias externas: Swing viene con el JDK -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Asegura compilación con la versión especificada -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<!-- Usa 'release' si prefieres: <release>17</release> -->
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- Empaqueta el JAR con manifiesto para poder ejecutar: java -jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>Logica.ProbandoGui</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- Permite ejecutar con: mvn -q exec:java -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<mainClass>Logica.ProbandoGui</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<licenses>
+		<license>
+			<name>Unspecified</name>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>mauricio</id>
+			<name>Mauricio</name>
+		</developer>
+	</developers>
+
+</project>
