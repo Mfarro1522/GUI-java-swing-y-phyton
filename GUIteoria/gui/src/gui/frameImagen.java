@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.imageio.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Iterator;
 
 public class frameImagen {
     public static void main(String[] args) {
@@ -24,21 +25,41 @@ class MarcoImagen extends JFrame {
 }
 
 class laminaImagen extends JPanel {
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        //File miimagen = new File("src/gui/coche.png");
-        
-        try {
-			imagen = ImageIO.read(new File("src/gui/coche.png"));
+	//es mejor con constructor en este caso por que al crearlo lo cargamos en la imagen y en elecucion hace el for 
+	public laminaImagen () {
+		try {
+			
+	    //File miimagen = new File("src/gui/coche.png");
+		       
+			imagen = ImageIO.read(new File("src/gui/pelota.png"));
 		} catch (IOException e) {
 			System.out.println("no esta la imagen papi");
 		}
+	}
+	
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        int anchoImagen = imagen.getWidth(this);
+        int altoImagen = imagen.getHeight(this);
         
+        g.drawImage(imagen, 0, 0, null);
+//       si sabes la dimesiones 
+//        for (int i = 0; i < 300; i++) {
+//			for (int j = 0; j < 200; j++) {
+//				g.copyArea(0, 0, 16 , 16, 15*i, 15*j);
+//			}
+//		}
         
-        
-        g.drawImage(imagen, 5, 5, null);
+        //si no
+        for (int i = 0; i < 300; i++) {
+			for (int j = 0; j < 200; j++) {
+				if(i+j>0) {//para no repetir la primera impresion q pasa con el constructor
+				g.copyArea(0, 0, anchoImagen , altoImagen, anchoImagen*i, altoImagen*j);
+			}
+			}
+		}
         
         
     }
