@@ -82,6 +82,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed
         String pelicula = txt1.getText();
+        txt1.setText("");
         listaDesplegable.addItem(pelicula);
     }//GEN-LAST:event_botonActionPerformed
 
