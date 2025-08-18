@@ -2,6 +2,7 @@ package igu;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Ventana extends javax.swing.JFrame {
     
@@ -84,6 +85,7 @@ public class Ventana extends javax.swing.JFrame {
         String pelicula = txt1.getText();
         txt1.setText("");
         listaDesplegable.addItem(pelicula);
+        JOptionPane.showMessageDialog(this, "Pelicula agregada con exito ", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonActionPerformed
 
     private void listaDesplegableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaDesplegableActionPerformed
