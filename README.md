@@ -1,35 +1,23 @@
-# GUI-java-swing-y-phyton
+# GUI Java Swing y Python
 
-Repositorio de aplicaciones gráficas, sesiones y ejercicios.
+Este repositorio contiene ejemplos de GUI utilizando Java Swing y Python.
 
-## Acerca de este repositorio
+## Ejercicios
 
-Este repositorio está pensado principalmente para organizar mi propio aprendizaje y práctica sobre interfaces gráficas de usuario (GUI) en Java y Python. Aunque está enfocado en mi uso personal, quiero dar crédito a las fuentes de donde obtuve la información y los ejercicios, de modo que cualquier persona interesada pueda consultarlas de primera mano.
+Aquí encontrarás una lista de ejercicios:
 
-## Nota sobre Java Swing
+1. Ejercicio 1
+2. Ejercicio 2
+3. Ejercicio 3
 
-Swing ya no es la opción más moderna para crear interfaces gráficas en Java, pero sigue siendo muy útil para aprender los conceptos básicos de GUI. Su sintaxis clara y la cantidad de ejemplos disponibles lo hacen ideal para quienes se inician en la programación visual.
+## Playlist de ejercicios de Disco Duro de Roer
 
-## Fuentes de información y recursos
+[Playlist de ejercicios de Disco Duro de Roer](https://www.youtube.com/watch?v=inKumOh1QUw&list=PLaxZkGlLWHGXs8cv0EhPJHA1g6O2PFaZ4)
 
-- **Swing (teoría y ejemplos básicos):**
-  - Playlist de Java (sección Swing) de Píldoras Informáticas:  
-    [YouTube - Píldoras Informáticas - Java Swing](https://www.youtube.com/playlist?list=PLU8oAlHdN5BmpIQGDSHo5e1r4ZYWQ8m4B)
-  - Tutorial complementario en inglés:  
-    [TutorialsPoint - Swing](https://www.tutorialspoint.com/swing/index.htm)
+## Contribuciones
 
-- **Parte práctica, ejercicios y proyectos:**
-  - Playlist “Java desde 0” (parte de GUI) de TodoCode:  
-    [YouTube - TodoCode - Java desde 0](https://www.youtube.com/playlist?list=PLx4x_zx8csUjczg1qPHavU1vw1rJ6NqMp)
-  - Playlist de ejercicios de GUI de Disco Duro de Roer:  
-    [YouTube - Disco Duro de Roer - Ejercicios GUI](https://www.youtube.com/playlist?list=PLWtYZ2ejMVJm2l4mTqFzvISb8t1tG1GcI)
+Si deseas contribuir, por favor abre un issue o un pull request.
 
-## Estructura del repositorio
+## Licencia
 
-- `java/` — Ejemplos y ejercicios en Java Swing.
-- `python/` — (Futuro) Ejemplos de GUI en Python.
-
-## Notas finales
-
-- El código está organizado por nivel y temática para facilitar la consulta y la práctica.
-- Si te interesa profundizar, te recomiendo revisar directamente las fuentes mencionadas.
+Este proyecto está bajo la Licencia MIT.
