@@ -68,18 +68,31 @@ public class Baraja {
         Collections.shuffle(cartas);
     }
     
-    
-public void siguienteCarta() {
-    if (!cartas.isEmpty()) {
-        cartaActual = cartas.get(0);
-        cartas.remove(0);
-        c++;  
+        /* mi forma 
+    public void siguienteCarta() {
+    if (c < cartas.size()) {
+        cartaActual = cartas.get(c);
+        cartas.remove(c);  // No incrementes c aquí
+        // c se mantiene igual porque el array se achica
     } else {
+        cartas.removeAll(cartas);
         crearBaraja(cant);
         cartaActual = cartas.get(0);
         c = 0;
+    }*/
+    
+    //mejor pipipi me copie
+    public void siguienteCarta() {
+    if (!cartas.isEmpty()) {
+            cartaActual = cartas.get(0);
+            cartas.remove(0);
+         c++;  
+        } else {
+            crearBaraja(cant);
+            cartaActual = cartas.get(0);
+            c = 0;
+        }
     }
-}
     
     
         public ArrayList<Carta> getCartas() {
