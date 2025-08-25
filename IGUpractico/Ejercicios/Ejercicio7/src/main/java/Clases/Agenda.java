@@ -21,6 +21,24 @@ public class Agenda {
         contactos = new ArrayList<>();
     }
 
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
+    public int getContadorArchivos() {
+        return contadorArchivos;
+    }
+
+    public void setContadorArchivos(int contadorArchivos) {
+        this.contadorArchivos = contadorArchivos;
+    }
+    
+    
+
     public boolean aniadirContacto(Contacto c) {
         if (!contactos.contains(c)) {
             contactos.add(c);
@@ -54,6 +72,12 @@ public class Agenda {
     public boolean eliminarContacto(Contacto c) {
         return contactos.remove(c);
     }
+    
+    public void eliminarContactoPorIndice(int indice) {
+        if (indice>=0 && indice < contactos.size() ){
+            contactos.remove(indice);
+        }
+    }
 
     public boolean agendaLlena() {
         return contactos.size() >= 100; // Suponiendo un límite de 100 contactos
@@ -67,6 +91,29 @@ public class Agenda {
         //Generacion del Archivo   
         String nombreArchivo = nombreArchivoSiguiente();
         File archivo = new File(nombreArchivo);
+
+        try {
+            if (archivo.exists()) {
+                System.out.println("El archivo ya existe");
+            } else {
+                //escribir en el archivo
+                boolean anexar = archivo.exists();
+                PrintWriter salida = new PrintWriter(new FileWriter(archivo, anexar));
+                salida.println(listarContactos());
+                salida.close();
+                System.out.println("Contactos Exportados");
+            }
+        } catch (IOException e) {
+            System.out.println("No se pudo abrir el archivo: " + e.getMessage());
+            e.printStackTrace();
+        }
+    
+    }
+    
+    
+        public void exportarContactos (String nomArchivo){
+        //Generacion del Archivo   
+        File archivo = new File(nomArchivo);
 
         try {
             if (archivo.exists()) {
@@ -143,6 +190,28 @@ Es el valor que se insertará en lugar de %03d
         contarArchivos();
         try {
             List<String> lineas = Files.readAllLines(Paths.get("contactos"+contadorArchivos+".txt"));
+            
+            for (String linea : lineas) {
+                
+                String [] PartesDelinea = linea.split(",");
+
+                if (PartesDelinea.length >= 2) {
+                    String nombre = PartesDelinea[0];
+                    String numero = PartesDelinea[1];
+                    aniadirContacto(new Contacto(nombre, numero));
+                }
+            }
+        
+        } catch (IOException ex) {
+            System.out.println("no encontro el archivo");
+        }
+
+    }
+    
+        public void importarContactos (String nomArchivo){
+        contarArchivos();
+        try {
+            List<String> lineas = Files.readAllLines(Paths.get(nomArchivo));
             
             for (String linea : lineas) {
                 
