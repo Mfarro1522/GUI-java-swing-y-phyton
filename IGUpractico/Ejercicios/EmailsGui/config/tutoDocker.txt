@@ -1,0 +1,75 @@
+
+
+# 📌 Guía rápida: MailHog con Docker
+
+## 🔹 Encender MailHog
+
+1. Arrancar Docker (si está apagado):
+
+```bash
+sudo systemctl start docker
+```
+
+2. Iniciar el contenedor MailHog (si ya existe):
+
+```bash
+docker start mailhog
+```
+
+3. Si el contenedor no existe todavía, créalo:
+
+```bash
+docker run -d --name mailhog \
+  -p 1025:1025 -p 8025:8025 \
+  mailhog/mailhog
+```
+
+📍 Acceso:
+
+* SMTP → `localhost:1025`
+* Web UI → [http://localhost:8025](http://localhost:8025)
+
+---
+
+## 🔹 Apagar MailHog
+
+1. Detener solo el contenedor:
+
+```bash
+docker stop mailhog
+```
+
+2. Apagar todo Docker (si no usarás más contenedores):
+
+```bash
+sudo systemctl stop docker
+```
+
+3. Eliminar el contenedor (opcional, si quieres limpiar):
+
+```bash
+docker rm mailhog
+```
+
+---
+
+## 🔹 Arranque automático de Docker
+
+* Ver si Docker se inicia con el sistema:
+
+```bash
+systemctl is-enabled docker
+```
+
+* **Deshabilitar inicio automático** (no arranca con el sistema):
+
+```bash
+sudo systemctl disable docker
+```
+
+* **Habilitar inicio automático** (arranca con el sistema):
+
+```bash
+sudo systemctl enable docker
+```
+

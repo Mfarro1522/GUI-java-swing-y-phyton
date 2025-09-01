@@ -1,0 +1,33 @@
+# Archivo de configuración de ejemplo
+# Copia este archivo a config.prop y ajusta los valores
+
+# === CONFIGURACIÓN PARA DESARROLLO LOCAL (MailHog) ===
+# 1. Ejecuta: ./tools/mailhog
+# 2. Ve a: http://localhost:8025 para ver los emails
+mail.smtp.host=localhost
+mail.smtp.port=1025
+mail.smtp.user=test@test.com
+mail.smtp.password=
+mail.smtp.starttls.enable=false
+mail.smtp.auth=false
+mail.from.email=test@miapp.com
+
+# === CONFIGURACIÓN PARA PRODUCCIÓN (SendGrid) ===
+# Descomenta y configura para usar en producción
+# mail.smtp.host=smtp.sendgrid.net
+# mail.smtp.port=587
+# mail.smtp.user=apikey
+# mail.smtp.password=TU_API_KEY_AQUI
+# mail.smtp.starttls.enable=true
+# mail.smtp.auth=true
+# mail.from.email=tu_email_verificado@example.com
+
+# === CONFIGURACIÓN PARA PRODUCCIÓN (Gmail) ===
+# Requiere contraseña de aplicación
+# mail.smtp.host=smtp.gmail.com
+# mail.smtp.port=587
+# mail.smtp.user=tu_email@gmail.com
+# mail.smtp.password=TU_CONTRASEÑA_DE_APLICACION
+# mail.smtp.starttls.enable=true
+# mail.smtp.auth=true
+# mail.from.email=tu_email@gmail.com

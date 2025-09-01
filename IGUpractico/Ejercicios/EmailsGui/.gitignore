@@ -1,0 +1,24 @@
+# Archivos de configuración con credenciales
+config/config.prop
+
+# Archivos compilados
+target/
+*.class
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencias descargadas
+lib/
+
+# Herramientas locales
+tools/
