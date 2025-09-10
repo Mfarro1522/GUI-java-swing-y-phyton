@@ -71,5 +71,85 @@ sudo systemctl disable docker
 
 ```bash
 sudo systemctl enable docker
+
+
+###### tuto instalar
+---
+
+# 📌 Guía rápida: Instalar y usar MailHog con Docker (Ubuntu)
+
+## 🔹 1. Instalar Docker
+
+```bash
+sudo apt update
+sudo apt install -y docker.io
+```
+
+## 🔹 2. Habilitar Docker
+
+Arrancar y dejarlo activo:
+
+```bash
+sudo systemctl enable --now docker
+```
+
+(Con esto ya queda listo y se levanta cada vez que inicie el sistema, si lo desea puede deshabilitarlo luego con `sudo systemctl disable docker`).
+
+## 🔹 3. Probar Docker
+
+```bash
+docker run --rm hello-world
+```
+
+👉 Si ves el mensaje de “Hello from Docker!”, está todo bien.
+
+## 🔹 4. Descargar y levantar MailHog
+
+```bash
+docker run -d --name mailhog \
+  -p 1025:1025 -p 8025:8025 \
+  mailhog/mailhog
+```
+
+* **SMTP**: `localhost:1025`
+* **Interfaz Web**: [http://localhost:8025](http://localhost:8025)
+
+## 🔹 5. Usar MailHog en tu proyecto
+
+En la configuración de correo (Jakarta Mail, PHP, Python, etc.):
+
+```
+host: 127.0.0.1
+port: 1025
+auth: false
+tls: false
+```
+
+---
+
+# 📌 Apagar MailHog y Docker
+
+## 🔹 Solo apagar el contenedor MailHog
+
+```bash
+docker stop mailhog
+```
+
+## 🔹 Apagar Docker (todo el servicio)
+
+```bash
+sudo systemctl stop docker
+```
+
+## 🔹 Deshabilitar inicio automático de Docker
+
+```bash
+sudo systemctl disable docker
+```
+
+## 🔹 Arrancar manualmente Docker cuando lo necesite
+
+```bash
+sudo systemctl start docker
 ```
 
