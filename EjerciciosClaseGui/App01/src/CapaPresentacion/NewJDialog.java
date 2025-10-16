@@ -67,6 +67,11 @@ public class NewJDialog extends javax.swing.JDialog {
                 btnIniciarActionPerformed(evt);
             }
         });
+        btnIniciar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnIniciarKeyPressed(evt);
+            }
+        });
 
         btnSalir.setBackground(new java.awt.Color(255, 204, 204));
         btnSalir.setText("Salir");
@@ -164,6 +169,10 @@ public class NewJDialog extends javax.swing.JDialog {
     generarCaptcha();
     captchalabel.setIcon(new ImageIcon(captcha.getImage()));
     }//GEN-LAST:event_btncambiarActionPerformed
+
+    private void btnIniciarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIniciarKeyPressed
+
+    }//GEN-LAST:event_btnIniciarKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
