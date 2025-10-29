@@ -2,9 +2,11 @@ package CapaPresentacion;
 
 import CapaLogica.clsUsuario;
 import CapaLogica.clsMarca;
+import CapaLogica.clsCategoria;
 import CapaPresentacion.frMantenimiento;
 import capaDatos.clsUsuarioDao;
 import capaDatos.clsMarcaDao;
+import capaDatos.clsCategoriaDao;
 import javax.swing.ImageIcon;
 
 public class frMenu extends javax.swing.JFrame {
@@ -17,6 +19,7 @@ public class frMenu extends javax.swing.JFrame {
         initComponents();
         cargarUsuariosEjemplo();
         cargarMarcasEjemplo();
+        cargarCategoriasEjemplo();
 
         //} else {
         //this.dispose();
@@ -45,8 +48,9 @@ public class frMenu extends javax.swing.JFrame {
         itemCerrarSesion = new javax.swing.JMenuItem();
         itemSalir = new javax.swing.JMenuItem();
         menuMantenimiento = new javax.swing.JMenu();
-        itemMenuMarca = new javax.swing.JMenuItem();
         itemMenuUsr = new javax.swing.JMenuItem();
+        itemMenuMarca = new javax.swing.JMenuItem();
+        itemMenuManCategoria = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
         menuAyuda = new javax.swing.JMenu();
         menuReporte = new javax.swing.JMenu();
@@ -100,6 +104,14 @@ public class frMenu extends javax.swing.JFrame {
             }
         });
 
+        itemMenuUsr.setText("Usuarios");
+        itemMenuUsr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuUsrActionPerformed(evt);
+            }
+        });
+        menuMantenimiento.add(itemMenuUsr);
+
         itemMenuMarca.setText("Marcas");
         itemMenuMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,13 +120,13 @@ public class frMenu extends javax.swing.JFrame {
         });
         menuMantenimiento.add(itemMenuMarca);
 
-        itemMenuUsr.setText("Usuarios");
-        itemMenuUsr.addActionListener(new java.awt.event.ActionListener() {
+        itemMenuManCategoria.setText("Categoria");
+        itemMenuManCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMenuUsrActionPerformed(evt);
+                itemMenuManCategoriaActionPerformed(evt);
             }
         });
-        menuMantenimiento.add(itemMenuUsr);
+        menuMantenimiento.add(itemMenuManCategoria);
 
         barraMenu.add(menuMantenimiento);
 
@@ -201,11 +213,18 @@ public class frMenu extends javax.swing.JFrame {
         mantUsr.setVisible(true);
     }//GEN-LAST:event_itemMenuUsrActionPerformed
 
+    private void itemMenuManCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuManCategoriaActionPerformed
+        jdMantenimientoCategoria manCat = new jdMantenimientoCategoria();
+        manCat.setLocationRelativeTo(this);
+        manCat.setVisible(true);
+    }//GEN-LAST:event_itemMenuManCategoriaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemReporteUsuario;
     private javax.swing.JMenuItem ReporteUsuariosTipo;
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JMenuItem itemCerrarSesion;
+    private javax.swing.JMenuItem itemMenuManCategoria;
     private javax.swing.JMenuItem itemMenuMarca;
     private javax.swing.JMenuItem itemMenuUsr;
     private javax.swing.JMenuItem itemSalir;
@@ -256,5 +275,19 @@ public class frMenu extends javax.swing.JFrame {
         clsMarcaDao.agregar(new clsMarca("D004", "Distribuidor Nacional", true));
         clsMarcaDao.agregar(new clsMarca("D005", "Mega Tech", true));
         clsMarcaDao.agregar(new clsMarca("D006", "Componentes y Sistemas", false));
+    }
+
+    public static void cargarCategoriasEjemplo() {
+
+        // Categorías de productos
+        clsCategoriaDao.agregar(new clsCategoria("C001", "COMPUTADORAS", "Computadoras de escritorio y portátiles", true));
+        clsCategoriaDao.agregar(new clsCategoria("C002", "PERIFÉRICOS", "Periféricos y accesorios", true));
+        clsCategoriaDao.agregar(new clsCategoria("C003", "MONITORES", "Monitores y pantallas", true));
+        clsCategoriaDao.agregar(new clsCategoria("C004", "IMPRESORAS", "Impresoras y multifuncionales", true));
+        clsCategoriaDao.agregar(new clsCategoria("C005", "ACCESORIOS", "Cables, adaptadores y accesorios", true));
+        clsCategoriaDao.agregar(new clsCategoria("C006", "REDES", "Equipos de red y conectividad", true));
+        clsCategoriaDao.agregar(new clsCategoria("C007", "ALMACENAMIENTO", "Discos duros y memorias", true));
+        clsCategoriaDao.agregar(new clsCategoria("C008", "COMPONENTES", "Componentes internos", true));
+        clsCategoriaDao.agregar(new clsCategoria("C009", "SERVICIO TÉCNICO", "Servicio técnico y mantenimiento", false));
     }
 }

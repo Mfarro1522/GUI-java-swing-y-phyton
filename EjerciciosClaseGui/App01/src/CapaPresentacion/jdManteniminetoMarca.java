@@ -6,6 +6,7 @@ import capaDatos.clsMarcaDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author mauricio
@@ -31,6 +32,9 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
         cargarTabla();
 
         tablaMarca.setModel(modelo);
+        
+        //para que se vea como en la tabla de de usr
+
     }
 
     /**
@@ -309,21 +313,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEliminarMarcaActionPerformed
 
     private void BuscarMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarMarcaActionPerformed
-        String codigo = txtCodigoMarca.getText();
-
-        if (codigo == null || codigo.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese un código para buscar");
-            return;
-        }
-
-        clsMarca marca = clsMarcaDao.buscarPorCodigo(codigo);
-        if (marca != null) {
-            txtCodigoMarca.setText(marca.getCodigo());
-            txtNombreMarca.setText(marca.getNombre());
-            chkVijente.setSelected(marca.isEstado());
-        } else {
-            JOptionPane.showMessageDialog(this, "Marca no encontrada");
-        }
+        buscarMarca();
     }//GEN-LAST:event_BuscarMarcaActionPerformed
 
     private void tablaMarcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMarcaMouseClicked
@@ -337,9 +327,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
 
         clsMarca marca = clsMarcaDao.getElemento(fila);
         if (marca != null) {
-            txtCodigoMarca.setText(marca.getCodigo());
-            txtNombreMarca.setText(marca.getNombre());
-            chkVijente.setSelected(marca.isEstado());
+            cargarCampos(marca);
         }
     }//GEN-LAST:event_tablaMarcaMouseClicked
 
@@ -357,24 +345,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnModMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModMarcaActionPerformed
-        String codigo = txtCodigoMarca.getText();
-        String nombre = txtNombreMarca.getText();
-        boolean estado = chkVijente.isSelected();
-
-        if (codigo == null || codigo.trim().isEmpty() || nombre == null || nombre.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese código y nombre");
-            return;
-        }
-        
-
-        clsMarca marcaActualizada = new clsMarca(codigo, nombre, estado);
-        if (clsMarcaDao.actualizar(codigo, marcaActualizada)) {
-            JOptionPane.showMessageDialog(this, "Marca modificada correctamente");
-            RegargaTAbla();
-            limpiar();
-        } else {
-            JOptionPane.showMessageDialog(this, "Marca no encontrada");
-        }
+        modificarMarca();
     }//GEN-LAST:event_btnModMarcaActionPerformed
 
 
@@ -481,22 +452,48 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
         txtCodigoMarca.setText("");
         txtNombreMarca.setText("");
         chkVijente.setSelected(false);
-    }  
+    }
     
-    public void cambiarColumna (){
-        DefaultTableModel modelo = new DefaultTableModel() {
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 2) { 
-            return Boolean.class;
+    private void buscarMarca() {
+        String codigo = txtCodigoMarca.getText();
+
+        if (codigo == null || codigo.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un código para buscar");
+            return;
         }
-        return String.class; 
+
+        clsMarca marca = clsMarcaDao.buscarPorCodigo(codigo);
+        if (marca != null) {
+            cargarCampos(marca);
+        } else {
+            JOptionPane.showMessageDialog(this, "Marca no encontrada");
+        }
     }
-    };
     
+    private void modificarMarca() {
+        String codigo = txtCodigoMarca.getText();
+        String nombre = txtNombreMarca.getText();
+        boolean estado = chkVijente.isSelected();
+
+        if (codigo == null || codigo.trim().isEmpty() || nombre == null || nombre.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese código y nombre");
+            return;
+        }
+
+        clsMarca marcaActualizada = new clsMarca(codigo, nombre, estado);
+        if (clsMarcaDao.actualizar(codigo, marcaActualizada)) {
+            JOptionPane.showMessageDialog(this, "Marca modificada correctamente");
+            RegargaTAbla();
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(this, "Marca no encontrada");
+        }
     }
     
-    
-    
+    private void cargarCampos(clsMarca marca) {
+        txtCodigoMarca.setText(marca.getCodigo());
+        txtNombreMarca.setText(marca.getNombre());
+        chkVijente.setSelected(marca.isEstado());
+    }
 
 }

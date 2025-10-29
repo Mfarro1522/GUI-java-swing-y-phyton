@@ -5,7 +5,7 @@ import CapaLogica.clsCategoria;
 
 public class clsCategoriaDao {
     
-    private static clsCategoria[] objeto = new clsCategoria[20];
+    private static clsCategoria[] objeto = new clsCategoria[0];
     private static int cantidad;
 
     public clsCategoriaDao() {
@@ -14,7 +14,12 @@ public class clsCategoriaDao {
 
     public static void agregar(clsCategoria categoria) {
         categoria.setNombre(categoria.getNombre().toUpperCase());
-        objeto[cantidad] = categoria;
+        clsCategoria[] nuevoArray = new clsCategoria[objeto.length + 1];
+        for (int i = 0; i < objeto.length; i++) {
+            nuevoArray[i] = objeto[i];
+        }
+        nuevoArray[objeto.length] = categoria;
+        objeto = nuevoArray;
         cantidad++;
     }
 
@@ -22,10 +27,18 @@ public class clsCategoriaDao {
         if (indice < 0 || indice >= cantidad) {
             return false;
         }
-        for (int i = indice; i < cantidad - 1; i++) {
-            objeto[i] = objeto[i + 1];
+        
+        clsCategoria[] nuevoArray = new clsCategoria[objeto.length - 1];
+        
+        for (int i = 0; i < indice; i++) {
+            nuevoArray[i] = objeto[i];
         }
-        objeto[cantidad - 1] = null;
+        
+        for (int i = indice; i < cantidad - 1; i++) {
+            nuevoArray[i] = objeto[i + 1];
+        }
+
+        objeto = nuevoArray;
         cantidad--;
         return true;
     }
