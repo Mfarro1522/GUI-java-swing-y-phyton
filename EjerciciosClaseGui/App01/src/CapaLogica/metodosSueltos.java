@@ -1,5 +1,7 @@
 package CapaLogica;
 
+import javax.swing.JOptionPane;
+
 
 public class metodosSueltos {
 
@@ -22,5 +24,21 @@ public class metodosSueltos {
         // Math.random() devuelve [0.0,1.0). Multiplicando por rango obtenemos [0, rango)
         long offset = (long) (Math.random() * rango); // offset dentro del rango
         return (int) (min + offset);
+    }
+    
+    public static int pregunta (String cadena){
+        Object [] opciones = {"Si." , "No."};
+        int respuesta = JOptionPane.showOptionDialog(
+                null,
+                cadena,
+                "confirmacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+        return respuesta;
+       
     }
 }

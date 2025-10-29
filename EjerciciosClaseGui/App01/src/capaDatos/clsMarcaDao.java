@@ -17,6 +17,7 @@ public class clsMarcaDao {
     }
 
     public static void agregar(clsMarca usr) {
+        usr.setNombre(usr.getNombre().toUpperCase());
         objeto[cantidad] = usr;
         cantidad++;
     }

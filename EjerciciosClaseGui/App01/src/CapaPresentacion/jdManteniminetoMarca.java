@@ -1,6 +1,7 @@
 package CapaPresentacion;
 
 import CapaLogica.clsMarca;
+import CapaLogica.metodosSueltos;
 import capaDatos.clsMarcaDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,11 +24,12 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) tablaMarca.getModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
+
+
         modelo.addColumn("Estado");
 
         cargarTabla();
 
-        cargarTabla();
         tablaMarca.setModel(modelo);
     }
 
@@ -237,6 +239,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
 
             }
         ));
+        tablaMarca.setEnabled(false);
         tablaMarca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMarcaMouseClicked(evt);
@@ -329,7 +332,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
         int fila = tablaMarca.getSelectedRow();
 
         if (fila < 0) {
-            JOptionPane.showMessageDialog(this, "selecciona sp");
+            JOptionPane.showMessageDialog(this, "selecciona ps");
             return;
         }
 
@@ -343,6 +346,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
 
     private void btnBajaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaMarcaActionPerformed
         darBaja();
+        RegargaTAbla();
     }//GEN-LAST:event_btnBajaMarcaActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -362,6 +366,7 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Ingrese código y nombre");
             return;
         }
+        
 
         clsMarca marcaActualizada = new clsMarca(codigo, nombre, estado);
         if (clsMarcaDao.actualizar(codigo, marcaActualizada)) {
@@ -434,6 +439,10 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "selecciona una fila ps");
             return;
         }
+        
+       if  ( metodosSueltos.pregunta("Esta seguro de eliminar la marca "+txtNombreMarca.getText()) == JOptionPane.NO_OPTION){
+           return;
+       }
 
         DefaultTableModel modelo = (DefaultTableModel) tablaMarca.getModel();
         if (clsMarcaDao.eliminar(fila)) {
@@ -443,7 +452,6 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
         }
     }
 
-
     private void darBaja() {
         String codigo = txtCodigoMarca.getText();
 
@@ -451,9 +459,13 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "ingresa un codigo");
             return;
         }
+        
+        if  ( metodosSueltos.pregunta("Esta seguro de modificar la marca"+txtNombreMarca.getText()) == JOptionPane.NO_OPTION){
+           return;
+       }
 
         if (clsMarcaDao.darBaja(codigo)) {
-            chkVijente.setSelected(false);
+            clsMarcaDao.darBaja(codigo);
             JOptionPane.showMessageDialog(this, "Marca dada de baja");
         } else {
             JOptionPane.showMessageDialog(this, "ingresa un codigo valido");
@@ -470,6 +482,22 @@ public class jdManteniminetoMarca extends javax.swing.JDialog {
         txtCodigoMarca.setText("");
         txtNombreMarca.setText("");
         chkVijente.setSelected(false);
+    }  
+    
+    public void cambiarColumna (){
+        DefaultTableModel modelo = new DefaultTableModel() {
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        if (columnIndex == 2) { 
+            return Boolean.class;
+        }
+        return String.class; 
     }
+    };
+    
+    }
+    
+    
+    
 
 }
