@@ -1,0 +1,26 @@
+package CapaLogica;
+
+
+public class metodosSueltos {
+
+    public static int generarNumero(int min, int max) {
+        if (min == max) {
+            return min; // único valor posible
+        }
+        // Si están al revés, intercambiamos
+        if (min > max) {
+            int tmp = min;
+            min = max;
+            max = tmp;
+        }
+        // Usamos long para evitar overflow al calcular el tamaño del rango
+        long rango = (long) max - (long) min + 1L; // tamaño del rango inclusivo
+        if (rango <= 0L) {
+            // Esto solo pasaría si el cálculo sobrepasa los límites de int (extremadamente improbable aquí)
+            throw new IllegalArgumentException("Rango inválido: demasiado grande");
+        }
+        // Math.random() devuelve [0.0,1.0). Multiplicando por rango obtenemos [0, rango)
+        long offset = (long) (Math.random() * rango); // offset dentro del rango
+        return (int) (min + offset);
+    }
+}
