@@ -1,5 +1,9 @@
 package CapaLogica;
 
+import capaDatos.clsCategoriaDao;
+import capaDatos.clsMarcaDao;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 
@@ -40,5 +44,34 @@ public class metodosSueltos {
         );
         return respuesta;
        
+    }
+    
+    public static void ListarMarcas (JComboBox combo){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        try {
+            clsMarca [] marcas =  clsMarcaDao.obtener();
+            int cantidad = clsMarcaDao.getCantidad();
+            for (int i = 0; i < cantidad; i++) {
+                modelo.addElement(marcas[i].getNombre());
+            }
+            combo.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()+ "no hay marcas");
+        }
+    }
+    
+        public static void ListarCategorias (JComboBox combo){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        try {
+            clsCategoria [] categorias =  clsCategoriaDao.obtener();
+            int cantidad = clsCategoriaDao.getCantidad();
+            for (int i = 0; i < cantidad; i++) {
+                modelo.addElement(categorias[i].getNombre());
+            }
+            combo.setModel(modelo);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()+ "no hay categorias");
+        }
     }
 }

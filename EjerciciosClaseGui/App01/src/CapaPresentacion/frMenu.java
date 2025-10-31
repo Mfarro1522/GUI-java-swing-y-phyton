@@ -3,10 +3,12 @@ package CapaPresentacion;
 import CapaLogica.clsUsuario;
 import CapaLogica.clsMarca;
 import CapaLogica.clsCategoria;
+import CapaLogica.clsProducto;
 import CapaPresentacion.frMantenimiento;
 import capaDatos.clsUsuarioDao;
 import capaDatos.clsMarcaDao;
 import capaDatos.clsCategoriaDao;
+import capaDatos.clsProductoDao;
 import javax.swing.ImageIcon;
 
 public class frMenu extends javax.swing.JFrame {
@@ -20,6 +22,7 @@ public class frMenu extends javax.swing.JFrame {
         cargarUsuariosEjemplo();
         cargarMarcasEjemplo();
         cargarCategoriasEjemplo();
+        cargarProductosEjemplo();
 
         //} else {
         //this.dispose();
@@ -51,6 +54,7 @@ public class frMenu extends javax.swing.JFrame {
         itemMenuUsr = new javax.swing.JMenuItem();
         itemMenuMarca = new javax.swing.JMenuItem();
         itemMenuManCategoria = new javax.swing.JMenuItem();
+        itemMenuProducto = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
         menuAyuda = new javax.swing.JMenu();
         menuReporte = new javax.swing.JMenu();
@@ -127,6 +131,14 @@ public class frMenu extends javax.swing.JFrame {
             }
         });
         menuMantenimiento.add(itemMenuManCategoria);
+
+        itemMenuProducto.setText("Producto");
+        itemMenuProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuProductoActionPerformed(evt);
+            }
+        });
+        menuMantenimiento.add(itemMenuProducto);
 
         barraMenu.add(menuMantenimiento);
 
@@ -219,6 +231,12 @@ public class frMenu extends javax.swing.JFrame {
         manCat.setVisible(true);
     }//GEN-LAST:event_itemMenuManCategoriaActionPerformed
 
+    private void itemMenuProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuProductoActionPerformed
+       frMantemientoProductos manProductos = new frMantemientoProductos(this, true);
+       manProductos.setLocationRelativeTo(this);
+       manProductos.setVisible(true);
+    }//GEN-LAST:event_itemMenuProductoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemReporteUsuario;
     private javax.swing.JMenuItem ReporteUsuariosTipo;
@@ -226,6 +244,7 @@ public class frMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCerrarSesion;
     private javax.swing.JMenuItem itemMenuManCategoria;
     private javax.swing.JMenuItem itemMenuMarca;
+    private javax.swing.JMenuItem itemMenuProducto;
     private javax.swing.JMenuItem itemMenuUsr;
     private javax.swing.JMenuItem itemSalir;
     private javax.swing.JMenu jMenu1;
@@ -260,34 +279,35 @@ public class frMenu extends javax.swing.JFrame {
 
     public static void cargarMarcasEjemplo() {
 
-        // Marcas de PC
+        // Marcas principales
         clsMarcaDao.agregar(new clsMarca("M001", "DELL", true));
         clsMarcaDao.agregar(new clsMarca("M002", "HP", true));
         clsMarcaDao.agregar(new clsMarca("M003", "Lenovo", true));
         clsMarcaDao.agregar(new clsMarca("M004", "ASUS", true));
         clsMarcaDao.agregar(new clsMarca("M005", "Acer", true));
         clsMarcaDao.agregar(new clsMarca("M006", "Apple", true));
-
-        // Distribuidores
-        clsMarcaDao.agregar(new clsMarca("D001", "Tech Store Perú", true));
-        clsMarcaDao.agregar(new clsMarca("D002", "Computadoras Plaza", true));
-        clsMarcaDao.agregar(new clsMarca("D003", "PC Center", true));
-        clsMarcaDao.agregar(new clsMarca("D004", "Distribuidor Nacional", true));
-        clsMarcaDao.agregar(new clsMarca("D005", "Mega Tech", true));
-        clsMarcaDao.agregar(new clsMarca("D006", "Componentes y Sistemas", false));
     }
 
     public static void cargarCategoriasEjemplo() {
 
-        // Categorías de productos
+        // Categorías de productos (reducidas a 5 principales)
         clsCategoriaDao.agregar(new clsCategoria("C001", "COMPUTADORAS", "Computadoras de escritorio y portátiles", true));
         clsCategoriaDao.agregar(new clsCategoria("C002", "PERIFÉRICOS", "Periféricos y accesorios", true));
         clsCategoriaDao.agregar(new clsCategoria("C003", "MONITORES", "Monitores y pantallas", true));
-        clsCategoriaDao.agregar(new clsCategoria("C004", "IMPRESORAS", "Impresoras y multifuncionales", true));
-        clsCategoriaDao.agregar(new clsCategoria("C005", "ACCESORIOS", "Cables, adaptadores y accesorios", true));
-        clsCategoriaDao.agregar(new clsCategoria("C006", "REDES", "Equipos de red y conectividad", true));
-        clsCategoriaDao.agregar(new clsCategoria("C007", "ALMACENAMIENTO", "Discos duros y memorias", true));
-        clsCategoriaDao.agregar(new clsCategoria("C008", "COMPONENTES", "Componentes internos", true));
-        clsCategoriaDao.agregar(new clsCategoria("C009", "SERVICIO TÉCNICO", "Servicio técnico y mantenimiento", false));
+        clsCategoriaDao.agregar(new clsCategoria("C004", "ALMACENAMIENTO", "Discos duros y memorias", true));
+        clsCategoriaDao.agregar(new clsCategoria("C005", "COMPONENTES", "Componentes internos y procesadores", true));
+    }
+
+    public static void cargarProductosEjemplo() {
+
+        clsProductoDao.agregar(new clsProducto("P001", "Laptop Dell Inspiron 15", "Laptop Intel Core i7, 8GB RAM, 256GB SSD", 1299.99, 15, "COMPUTADORAS", "DELL", true));
+
+        clsProductoDao.agregar(new clsProducto("P002", "Mouse Inalámbrico HP", "Mouse inalámbrico profesional con batería", 49.99, 30, "PERIFÉRICOS", "HP", true));
+
+        clsProductoDao.agregar(new clsProducto("P003", "Monitor Lenovo 24 IPS", "Monitor 24\" Full HD 75Hz con panel IPS", 249.99, 18, "MONITORES", "Lenovo", true));
+
+        clsProductoDao.agregar(new clsProducto("P004", "Disco Duro ASUS 1TB", "Disco duro interno 3.5\" 1TB 7200RPM", 79.99, 25, "ALMACENAMIENTO", "ASUS", true));
+
+        clsProductoDao.agregar(new clsProducto("P005", "Procesador AMD Ryzen 5", "CPU AMD Ryzen 5 5600X 6 núcleos", 199.99, 8, "COMPONENTES", "Apple", true));
     }
 }
