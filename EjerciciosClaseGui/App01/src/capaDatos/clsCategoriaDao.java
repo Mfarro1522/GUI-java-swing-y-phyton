@@ -2,9 +2,8 @@ package capaDatos;
 
 import CapaLogica.clsCategoria;
 
-
 public class clsCategoriaDao {
-    
+
     private static clsCategoria[] objeto = new clsCategoria[0];
     private static int cantidad;
 
@@ -27,13 +26,13 @@ public class clsCategoriaDao {
         if (indice < 0 || indice >= cantidad) {
             return false;
         }
-        
+
         clsCategoria[] nuevoArray = new clsCategoria[objeto.length - 1];
-        
+
         for (int i = 0; i < indice; i++) {
             nuevoArray[i] = objeto[i];
         }
-        
+
         for (int i = indice; i < cantidad - 1; i++) {
             nuevoArray[i] = objeto[i + 1];
         }
@@ -51,22 +50,13 @@ public class clsCategoriaDao {
         return cantidad;
     }
 
+    // Obtiene un elemento por su índice
     public static clsCategoria getElemento(int index) {
-        int pos = -1;
-
-        for (int i = 0; i < cantidad; i++) {
-            if (i == index) {
-                pos = i;
-                break;
-            }
-        }
-        if (pos != -1) {
+        if (index >= 0 && index < cantidad) {
             return objeto[index];
-        } else {
-            return null;
         }
+        return null;
     }
-
 
     public static clsCategoria buscarPorCodigo(String codigo) {
         if (codigo == null) {
@@ -79,8 +69,8 @@ public class clsCategoriaDao {
         }
         return null;
     }
-    
-        public static int buscarIndicePorCodigo(String codigo) {
+
+    public static int buscarIndicePorCodigo(String codigo) {
         if (codigo == null) {
             return -1;
         }
@@ -123,5 +113,4 @@ public class clsCategoriaDao {
         return false;
     }
 
-    
 }

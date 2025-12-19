@@ -1,7 +1,7 @@
 package CapaLogica;
 
 public class clsCategoria {
-    
+
     private String codigo;
     private String nombre;
     private String descripcion;
@@ -51,14 +51,6 @@ public class clsCategoria {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public boolean isVijente() {
-        return vigente;
-    }
-
-    public void setVijente(boolean vijente) {
-        this.vigente = vijente;
     }
 
 }

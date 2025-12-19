@@ -9,12 +9,7 @@ import CapaLogica.*;
 public class clsMarcaDao {
 
     private static clsMarca[] objeto = new clsMarca[20];
-    private static int cantidad;
-    private final String[] TIPOS = {"Administrador", "vendedor", "gerente", "Administrativo"};
-
-    public clsMarcaDao() {
-        cantidad = 0;
-    }
+    private static int cantidad = 0;
 
     public static void agregar(clsMarca usr) {
         usr.setNombre(usr.getNombre().toUpperCase());
@@ -42,22 +37,13 @@ public class clsMarcaDao {
         return cantidad;
     }
 
+    // Obtiene un elemento por su índice
     public static clsMarca getElemento(int index) {
-        int pos = -1;
-
-        for (int i = 0; i < cantidad; i++) {
-            if (i == index) {
-                pos = i;
-                break;
-            }
-        }
-        if (pos != -1) {
+        if (index >= 0 && index < cantidad) {
             return objeto[index];
-        } else {
-            return null;
         }
+        return null;
     }
-
 
     public static clsMarca buscarPorCodigo(String codigo) {
         if (codigo == null) {
@@ -70,8 +56,8 @@ public class clsMarcaDao {
         }
         return null;
     }
-    
-        public static int buscarIndicePorCodigo(String codigo) {
+
+    public static int buscarIndicePorCodigo(String codigo) {
         if (codigo == null) {
             return -1;
         }

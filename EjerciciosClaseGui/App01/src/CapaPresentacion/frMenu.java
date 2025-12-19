@@ -4,12 +4,16 @@ import CapaLogica.clsUsuario;
 import CapaLogica.clsMarca;
 import CapaLogica.clsCategoria;
 import CapaLogica.clsProducto;
-import CapaPresentacion.frMantenimiento;
+import CapaLogica.clsCliente;
+import CapaLogica.clsVenta;
 import capaDatos.clsUsuarioDao;
 import capaDatos.clsMarcaDao;
 import capaDatos.clsCategoriaDao;
 import capaDatos.clsProductoDao;
+import capaDatos.clsClienteDao;
+import capaDatos.clsVentaDao;
 import javax.swing.ImageIcon;
+import java.time.LocalDate;
 
 public class frMenu extends javax.swing.JFrame {
 
@@ -17,17 +21,19 @@ public class frMenu extends javax.swing.JFrame {
 
     public frMenu() {
 
-        //if (dlgLogin.selogeo()) {
+        // if (dlgLogin.selogeo()) {
         initComponents();
         cargarUsuariosEjemplo();
         cargarMarcasEjemplo();
         cargarCategoriasEjemplo();
         cargarProductosEjemplo();
+        cargarClientesEjemplo();
+        cargarVentasEjemplo();
 
-        //} else {
-        //this.dispose();
-        //System.exit(0);
-        //}
+        // } else {
+        // this.dispose();
+        // System.exit(0);
+        // }
         frLogin dlgLogin = new frLogin(this, true);
         dlgLogin.setLocationRelativeTo(this);
         dlgLogin.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
@@ -37,7 +43,9 @@ public class frMenu extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -55,7 +63,9 @@ public class frMenu extends javax.swing.JFrame {
         itemMenuMarca = new javax.swing.JMenuItem();
         itemMenuManCategoria = new javax.swing.JMenuItem();
         itemMenuProducto = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         menuReporte = new javax.swing.JMenu();
         ItemReporteUsuario = new javax.swing.JMenuItem();
@@ -140,9 +150,26 @@ public class frMenu extends javax.swing.JFrame {
         });
         menuMantenimiento.add(itemMenuProducto);
 
+        jMenuItem3.setText("Cliente");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menuMantenimiento.add(jMenuItem3);
+
         barraMenu.add(menuMantenimiento);
 
         menuOperaciones.setText("operaciones");
+
+        jMenuItem4.setText("Ventas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menuOperaciones.add(jMenuItem4);
+
         barraMenu.add(menuOperaciones);
 
         menuAyuda.setText("ayuda");
@@ -173,69 +200,78 @@ public class frMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 796, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 487, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalirActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
+        jdManCliente manCliente = new jdManCliente(this, true);
+        manCliente.setLocationRelativeTo(this);
+        manCliente.setVisible(true);
+    }// GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem4ActionPerformed
+        jdVenta manVenta = new jdVenta(this, true);
+        manVenta.setLocationRelativeTo(this);
+        manVenta.setVisible(true);
+    }// GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void itemSalirActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_itemSalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_itemSalirActionPerformed
+    }// GEN-LAST:event_itemSalirActionPerformed
 
-    private void itemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCerrarSesionActionPerformed
+    private void itemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_itemCerrarSesionActionPerformed
         this.dispose();
-    }//GEN-LAST:event_itemCerrarSesionActionPerformed
+    }// GEN-LAST:event_itemCerrarSesionActionPerformed
 
-    private void menuMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMantenimientoActionPerformed
+    private void menuMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuMantenimientoActionPerformed
 
+    }// GEN-LAST:event_menuMantenimientoActionPerformed
 
-    }//GEN-LAST:event_menuMantenimientoActionPerformed
+    private void menuMantenimientoMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_menuMantenimientoMouseClicked
 
-    private void menuMantenimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMantenimientoMouseClicked
+    }// GEN-LAST:event_menuMantenimientoMouseClicked
 
-    }//GEN-LAST:event_menuMantenimientoMouseClicked
-
-    private void ItemReporteUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemReporteUsuarioActionPerformed
+    private void ItemReporteUsuarioActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ItemReporteUsuarioActionPerformed
         JdRepUsuarios objForm = new JdRepUsuarios(this, true);
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
-    }//GEN-LAST:event_ItemReporteUsuarioActionPerformed
+    }// GEN-LAST:event_ItemReporteUsuarioActionPerformed
 
-    private void ReporteUsuariosTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteUsuariosTipoActionPerformed
+    private void ReporteUsuariosTipoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ReporteUsuariosTipoActionPerformed
         jdReportePorTipo objForm = new jdReportePorTipo(this, true);
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
-    }//GEN-LAST:event_ReporteUsuariosTipoActionPerformed
+    }// GEN-LAST:event_ReporteUsuariosTipoActionPerformed
 
-    private void itemMenuMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuMarcaActionPerformed
+    private void itemMenuMarcaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_itemMenuMarcaActionPerformed
         jdManteniminetoMarca manMarca = new jdManteniminetoMarca(this, true);
         manMarca.setLocationRelativeTo(manMarca);
         manMarca.setVisible(true);
-    }//GEN-LAST:event_itemMenuMarcaActionPerformed
+    }// GEN-LAST:event_itemMenuMarcaActionPerformed
 
-    private void itemMenuUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuUsrActionPerformed
+    private void itemMenuUsrActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_itemMenuUsrActionPerformed
         frMantenimiento mantUsr = new frMantenimiento();
         mantUsr.setLocationRelativeTo(mantUsr);
         mantUsr.setVisible(true);
-    }//GEN-LAST:event_itemMenuUsrActionPerformed
+    }// GEN-LAST:event_itemMenuUsrActionPerformed
 
-    private void itemMenuManCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuManCategoriaActionPerformed
+    private void itemMenuManCategoriaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_itemMenuManCategoriaActionPerformed
         jdMantenimientoCategoria manCat = new jdMantenimientoCategoria();
         manCat.setLocationRelativeTo(this);
         manCat.setVisible(true);
-    }//GEN-LAST:event_itemMenuManCategoriaActionPerformed
+    }// GEN-LAST:event_itemMenuManCategoriaActionPerformed
 
-    private void itemMenuProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuProductoActionPerformed
-       frMantemientoProductos manProductos = new frMantemientoProductos(this, true);
-       manProductos.setLocationRelativeTo(this);
-       manProductos.setVisible(true);
-    }//GEN-LAST:event_itemMenuProductoActionPerformed
+    private void itemMenuProductoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_itemMenuProductoActionPerformed
+        frMantemientoProductos manProductos = new frMantemientoProductos(this, true);
+        manProductos.setLocationRelativeTo(this);
+        manProductos.setVisible(true);
+    }// GEN-LAST:event_itemMenuProductoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemReporteUsuario;
@@ -252,6 +288,8 @@ public class frMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenu menuMantenimiento;
@@ -291,7 +329,8 @@ public class frMenu extends javax.swing.JFrame {
     public static void cargarCategoriasEjemplo() {
 
         // Categorías de productos (reducidas a 5 principales)
-        clsCategoriaDao.agregar(new clsCategoria("C001", "COMPUTADORAS", "Computadoras de escritorio y portátiles", true));
+        clsCategoriaDao
+                .agregar(new clsCategoria("C001", "COMPUTADORAS", "Computadoras de escritorio y portátiles", true));
         clsCategoriaDao.agregar(new clsCategoria("C002", "PERIFÉRICOS", "Periféricos y accesorios", true));
         clsCategoriaDao.agregar(new clsCategoria("C003", "MONITORES", "Monitores y pantallas", true));
         clsCategoriaDao.agregar(new clsCategoria("C004", "ALMACENAMIENTO", "Discos duros y memorias", true));
@@ -300,14 +339,101 @@ public class frMenu extends javax.swing.JFrame {
 
     public static void cargarProductosEjemplo() {
 
-        clsProductoDao.agregar(new clsProducto("P001", "Laptop Dell Inspiron 15", "Laptop Intel Core i7, 8GB RAM, 256GB SSD", 1299.99, 15, "COMPUTADORAS", "DELL", true));
+        clsProductoDao.agregar(new clsProducto("P001", "Laptop Dell Inspiron 15",
+                "Laptop Intel Core i7, 8GB RAM, 256GB SSD", 1299.99, 15, "COMPUTADORAS", "DELL", true));
 
-        clsProductoDao.agregar(new clsProducto("P002", "Mouse Inalámbrico HP", "Mouse inalámbrico profesional con batería", 49.99, 30, "PERIFÉRICOS", "HP", true));
+        clsProductoDao.agregar(new clsProducto("P002", "Mouse Inalámbrico HP",
+                "Mouse inalámbrico profesional con batería", 49.99, 30, "PERIFÉRICOS", "HP", true));
 
-        clsProductoDao.agregar(new clsProducto("P003", "Monitor Lenovo 24 IPS", "Monitor 24\" Full HD 75Hz con panel IPS", 249.99, 18, "MONITORES", "Lenovo", true));
+        clsProductoDao.agregar(new clsProducto("P003", "Monitor Lenovo 24 IPS",
+                "Monitor 24\" Full HD 75Hz con panel IPS", 249.99, 18, "MONITORES", "Lenovo", true));
 
-        clsProductoDao.agregar(new clsProducto("P004", "Disco Duro ASUS 1TB", "Disco duro interno 3.5\" 1TB 7200RPM", 79.99, 25, "ALMACENAMIENTO", "ASUS", true));
+        clsProductoDao.agregar(new clsProducto("P004", "Disco Duro ASUS 1TB", "Disco duro interno 3.5\" 1TB 7200RPM",
+                79.99, 25, "ALMACENAMIENTO", "ASUS", true));
 
-        clsProductoDao.agregar(new clsProducto("P005", "Procesador AMD Ryzen 5", "CPU AMD Ryzen 5 5600X 6 núcleos", 199.99, 8, "COMPONENTES", "Apple", true));
+        clsProductoDao.agregar(new clsProducto("P005", "Procesador AMD Ryzen 5", "CPU AMD Ryzen 5 5600X 6 núcleos",
+                199.99, 8, "COMPONENTES", "Apple", true));
+    }
+
+    public static void cargarClientesEjemplo() {
+        // Clientes con DNI (Persona Natural)
+        clsClienteDao.agregar(new clsCliente("12345678", "DNI", "Juan Pérez García", "Av. Los Álamos 123, Lima", true));
+        clsClienteDao
+                .agregar(new clsCliente("87654321", "DNI", "María López Torres", "Jr. Las Flores 456, Chiclayo", true));
+        clsClienteDao.agregar(
+                new clsCliente("45678912", "DNI", "Carlos Rodríguez Sánchez", "Calle Principal 789, Trujillo", true));
+        clsClienteDao.agregar(new clsCliente("32165498", "DNI", "Ana Martínez Ruiz", "Av. Grau 321, Piura", false));
+        clsClienteDao
+                .agregar(new clsCliente("65498732", "DNI", "Pedro Gómez Díaz", "Jr. Libertad 654, Arequipa", true));
+
+        // Clientes con RUC (Persona Jurídica)
+        clsClienteDao.agregar(
+                new clsCliente("20123456789", "RUC", "Tech Solutions S.A.C.", "Av. Industrial 1000, Lima", true));
+        clsClienteDao.agregar(
+                new clsCliente("20987654321", "RUC", "Comercial Norte E.I.R.L.", "Jr. Comercio 500, Chiclayo", true));
+        clsClienteDao.agregar(
+                new clsCliente("20456789123", "RUC", "Distribuidora Sur S.A.", "Av. Tacna 250, Arequipa", true));
+        clsClienteDao.agregar(new clsCliente("20789123456", "RUC", "Importaciones Lima S.A.C.",
+                "Calle Los Negocios 100, Lima", false));
+        clsClienteDao.agregar(new clsCliente("20321654987", "RUC", "Servicios Integrados E.I.R.L.",
+                "Av. República 800, Trujillo", true));
+    }
+
+    public static void cargarVentasEjemplo() {
+        // Ventas de ejemplo
+        clsVentaDao.agregar(new clsVenta(
+                clsVentaDao.generarNumeroVenta(),
+                LocalDate.now().minusDays(5),
+                "12345678",
+                "JUAN PÉREZ GARCÍA",
+                "P001",
+                "LAPTOP DELL INSPIRON 15",
+                1299.99,
+                1,
+                true));
+
+        clsVentaDao.agregar(new clsVenta(
+                clsVentaDao.generarNumeroVenta(),
+                LocalDate.now().minusDays(3),
+                "87654321",
+                "MARÍA LÓPEZ TORRES",
+                "P002",
+                "MOUSE INALÁMBRICO HP",
+                49.99,
+                2,
+                true));
+
+        clsVentaDao.agregar(new clsVenta(
+                clsVentaDao.generarNumeroVenta(),
+                LocalDate.now().minusDays(2),
+                "20123456789",
+                "TECH SOLUTIONS S.A.C.",
+                "P003",
+                "MONITOR LENOVO 24 IPS",
+                249.99,
+                3,
+                true));
+
+        clsVentaDao.agregar(new clsVenta(
+                clsVentaDao.generarNumeroVenta(),
+                LocalDate.now().minusDays(1),
+                "45678912",
+                "CARLOS RODRÍGUEZ SÁNCHEZ",
+                "P004",
+                "DISCO DURO ASUS 1TB",
+                79.99,
+                2,
+                true));
+
+        clsVentaDao.agregar(new clsVenta(
+                clsVentaDao.generarNumeroVenta(),
+                LocalDate.now(),
+                "20987654321",
+                "COMERCIAL NORTE E.I.R.L.",
+                "P005",
+                "PROCESADOR AMD RYZEN 5",
+                199.99,
+                5,
+                true));
     }
 }

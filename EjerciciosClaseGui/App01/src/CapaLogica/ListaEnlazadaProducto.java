@@ -24,7 +24,7 @@ public class ListaEnlazadaProducto {
     // Agregar producto al final de la lista
     public void agregar(clsProducto producto) {
         NodoProducto nuevoNodo = new NodoProducto(producto);
-        
+
         if (inicio == null) {
             inicio = nuevoNodo;
         } else {
@@ -90,7 +90,7 @@ public class ListaEnlazadaProducto {
         return null;
     }
 
-    // Buscar el índice de un producto por código
+    // Retorna el índice del producto o -1 si no existe
     public int buscarIndicePorCodigo(String codigo) {
         if (codigo == null) {
             return -1;
