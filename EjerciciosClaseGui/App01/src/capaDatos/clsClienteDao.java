@@ -69,17 +69,17 @@ public class clsClienteDao {
         return null;
     }
 
-    public static clsCliente buscarPorDniRuc(String dniRuc) {
-        if (dniRuc == null) {
+        public static clsCliente buscarPorDniRuc(String dniRuc) {
+            if (dniRuc == null) {
+                return null;
+            }
+            for (int i = 0; i < cantidad; i++) {
+                if (clientes[i] != null && dniRuc.equals(clientes[i].getDniRuc())) {
+                    return clientes[i];
+                }
+            }
             return null;
         }
-        for (int i = 0; i < cantidad; i++) {
-            if (clientes[i] != null && dniRuc.equals(clientes[i].getDniRuc())) {
-                return clientes[i];
-            }
-        }
-        return null;
-    }
 
     public static int buscarIndicePorDniRuc(String dniRuc) {
         if (dniRuc == null) {

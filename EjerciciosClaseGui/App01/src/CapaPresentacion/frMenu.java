@@ -28,7 +28,7 @@ public class frMenu extends javax.swing.JFrame {
         cargarCategoriasEjemplo();
         cargarProductosEjemplo();
         cargarClientesEjemplo();
-        cargarVentasEjemplo();
+        //cargarVentasEjemplo();
 
         // } else {
         // this.dispose();
@@ -379,7 +379,7 @@ public class frMenu extends javax.swing.JFrame {
                 "Av. República 800, Trujillo", true));
     }
 
-    public static void cargarVentasEjemplo() {
+    /*public static void cargarVentasEjemplo() {
         // Ventas de ejemplo
         clsVentaDao.agregar(new clsVenta(
                 clsVentaDao.generarNumeroVenta(),
@@ -435,5 +435,5 @@ public class frMenu extends javax.swing.JFrame {
                 199.99,
                 5,
                 true));
-    }
+    }*/
 }
