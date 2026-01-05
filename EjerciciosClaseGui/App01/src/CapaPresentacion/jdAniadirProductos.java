@@ -4,10 +4,7 @@
  */
 package CapaPresentacion;
 
-import CapaLogica.ListaEnlazadaProducto;
-import CapaLogica.clsCliente;
 import CapaLogica.clsProducto;
-import capaDatos.clsClienteDao;
 import capaDatos.clsProductoDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +16,11 @@ import javax.swing.table.DefaultTableModel;
 public class jdAniadirProductos extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(jdAniadirProductos.class.getName());
+    
+    // Variables para almacenar el producto seleccionado
+    private String prod = "";
+    private int cant = 0;
+    private int desc = 0;
 
     /**
      * Creates new form jdAniadirProductos
@@ -27,6 +29,31 @@ public class jdAniadirProductos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         cargarTabla();
+    }
+    
+    // Getters para pasar la información al formulario padre
+    public String getProd() {
+        return prod;
+    }
+
+    public void setProd(String prod) {
+        this.prod = prod;
+    }
+
+    public int getCant() {
+        return cant;
+    }
+
+    public void setCant(int cant) {
+        this.cant = cant;
+    }
+
+    public int getDesc() {
+        return desc;
+    }
+
+    public void setDesc(int desc) {
+        this.desc = desc;
     }
 
     /**
@@ -55,15 +82,22 @@ public class jdAniadirProductos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "codigo", "nombre", "descripcion", "Direccion", "precio", "stock", "categoria", "marca", "estado"
+                "codigo", "nombre", "descripcion", "precio", "stock", "categoria", "marca", "estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,16 +140,54 @@ public class jdAniadirProductos extends javax.swing.JDialog {
                 return;
             }
 
-            clsProducto producto = clsProductoDao.getElemento(fila);
-            if (producto != null) {
-                ListaEnlazadaProducto lp =  jdVenta.getProductos();
-                lp.agregar(producto);
-                jdVenta.setProductos(lp);
+            // Obtener el código del producto de la tabla (es String)
+            String cod = String.valueOf(jTable1.getValueAt(fila, 0));
+            
+            // Solicitar cantidad
+            String ctdStr = String.valueOf(JOptionPane.showInputDialog(this, "Ingrese la cantidad: "));
+            
+            if (ctdStr != null && !ctdStr.equals("null") && !ctdStr.isEmpty()) {
+                try {
+                    int ctd = Integer.parseInt(ctdStr);
+                    pasarDatos(cod, ctd);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Cantidad no válida");
+                }
             }
         }
-        
-        
     }//GEN-LAST:event_jTable1MouseClicked
+    
+    private void pasarDatos(String cod, int ctd) {
+        try {
+            clsProducto objPro = clsProductoDao.buscarPorCodigo(cod);
+            if (objPro != null) {
+                int stock = objPro.getStock();
+                if (ctd <= stock) {
+                    prod = cod;
+                    cant = ctd;
+                    String descuento = String.valueOf(JOptionPane.showInputDialog(this,
+                            "Ingrese el porcentaje de descuento: ", "0"));
+                    
+                    try {
+                        if (descuento != null && !descuento.equals("null") && !descuento.isEmpty()) {
+                            desc = Integer.parseInt(descuento);
+                        }
+                    } catch (NumberFormatException e) {
+                        desc = 0;
+                    }
+                    
+                    // Cerrar el diálogo después de seleccionar
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Stock insuficiente. Stock disponible: " + stock);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Producto no encontrado");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+    }
 
     private void txtnomProdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnomProdKeyPressed
 
@@ -177,5 +249,6 @@ public class jdAniadirProductos extends javax.swing.JDialog {
             }
         }
     }
+
 
 }
