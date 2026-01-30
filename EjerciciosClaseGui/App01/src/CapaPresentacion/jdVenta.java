@@ -5,12 +5,14 @@
 package CapaPresentacion;
 
 import CapaLogica.ListaEnlazadaProducto;
+import CapaLogica.clsDetalleVenta;
 import CapaLogica.clsVenta;
 import CapaLogica.clsCliente;
 import CapaLogica.clsProducto;
 import capaDatos.clsVentaDao;
 import capaDatos.clsClienteDao;
 import capaDatos.clsProductoDao;
+import contenedor.ContenedorVentas;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -72,11 +74,11 @@ public class jdVenta extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        dateVenta = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         numVenta = new javax.swing.JTextPane();
         btnBuscarVenta = new javax.swing.JButton();
+        dateVenta = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -144,27 +146,30 @@ public class jdVenta extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150)
+                .addGap(107, 107, 107)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68)
                 .addComponent(btnBuscarVenta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBuscarVenta)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(dateVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnBuscarVenta)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(dateVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
@@ -407,6 +412,11 @@ public class jdVenta extends javax.swing.JDialog {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseClicked(evt);
+            }
+        });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -490,6 +500,10 @@ public class jdVenta extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+  
+    }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void radioBoletaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_radioBoletaActionPerformed
         // TODO add your handling code here:
@@ -663,26 +677,31 @@ public class jdVenta extends javax.swing.JDialog {
             txtDni.setText(venta.getClienteDniRuc());
             txtNomCliente.setText(venta.getClienteNombre());
 
-            // Agregar a la tabla
+            // Limpiar y llenar la tabla con todos los productos de la venta
             DefaultTableModel modelo = (DefaultTableModel) tablaproductos.getModel();
             modelo.setRowCount(0);
 
-            double precio = venta.getProductoPrecio();
-            int cantidad = venta.getCantidad();
-            double subtotal = venta.calcularSubtotal();
+            for (int i = 0; i < venta.getCantidadDetalles(); i++) {
+                clsDetalleVenta detalle = venta.getDetalle(i);
+                double precio = detalle.getProductoPrecio();
+                int cantidad = detalle.getCantidad();
+                double descuento = detalle.getDescuentoPorcentaje();
+                double nuevoPrecio = detalle.getPrecioConDescuento();
+                double subtotal = detalle.calcularSubtotal();
 
-            modelo.addRow(new Object[] {
-                    venta.getProductoCodigo(),
-                    venta.getProductoNombre(),
-                    String.format("%.2f", precio),
-                    cantidad,
-                    "0",
-                    String.format("%.2f", precio),
-                    String.format("%.2f", subtotal)
-            });
+                modelo.addRow(new Object[] {
+                        detalle.getProductoCodigo(),
+                        detalle.getProductoNombre(),
+                        String.format("%.2f", precio),
+                        cantidad,
+                        String.format("%.2f", descuento),
+                        String.format("%.2f", nuevoPrecio),
+                        String.format("%.2f", subtotal)
+                });
+            }
 
             calcularTotales();
-            JOptionPane.showMessageDialog(this, "Venta encontrada");
+            JOptionPane.showMessageDialog(this, "Venta encontrada con " + venta.getCantidadDetalles() + " producto(s)");
         } else {
             JOptionPane.showMessageDialog(this, "Venta no encontrada");
         }
@@ -693,12 +712,12 @@ public class jdVenta extends javax.swing.JDialog {
         jd.setLocationRelativeTo(this);
         jd.setVisible(true);
         
-        // Recuperar datos del producto seleccionado
+
         String codigoProd = jd.getProd();
         int cantidadProd = jd.getCant();
         int descuentoProd = jd.getDesc();
         
-        // Si se seleccionó un producto válido
+
         if (codigoProd != null && !codigoProd.isEmpty() && cantidadProd > 0) {
             clsProducto producto = clsProductoDao.buscarPorCodigo(codigoProd);
             if (producto != null) {
@@ -707,16 +726,16 @@ public class jdVenta extends javax.swing.JDialog {
                 double nuevoPrecio = precio - (precio * descuento / 100);
                 double subtotal = nuevoPrecio * cantidadProd;
                 
-                // Agregar a la tabla
+
                 DefaultTableModel modelo = (DefaultTableModel) tablaproductos.getModel();
                 modelo.addRow(new Object[] {
                     producto.getCodigo(),
                     producto.getNombre(),
-                    String.format("%.2f", precio),
+                     precio,
                     cantidadProd,
-                    String.format("%.0f%%", descuento),
-                    String.format("%.2f", nuevoPrecio),
-                    String.format("%.2f", subtotal)
+                    descuento,
+                    nuevoPrecio,
+                    subtotal
                 });
                 
                 calcularTotales();
@@ -781,32 +800,31 @@ public class jdVenta extends javax.swing.JDialog {
         }
 
         // Generar número de venta
-        String numeroVentaGen = clsVentaDao.generarNumeroVenta();
+        String numeroVentaGen = ContenedorVentas.generarNumeroVenta();
 
-        // Guardar cada producto como una venta separada (o se puede crear una
-        // estructura más compleja)
+        // Crear la venta con todos los productos
+        clsVenta venta = new clsVenta(numeroVentaGen, fecha, dniRuc, nombreCliente, true);
+
+        // Agregar cada producto como detalle de la venta
         for (int i = 0; i < modelo.getRowCount(); i++) {
             String codigoProd = modelo.getValueAt(i, 0).toString();
             String nombreProd = modelo.getValueAt(i, 1).toString();
             double precioProd = Double.parseDouble(modelo.getValueAt(i, 2).toString().replace(",", "."));
             int cantidadProd = Integer.parseInt(modelo.getValueAt(i, 3).toString());
+            double descuentoProd = Double.parseDouble(modelo.getValueAt(i, 4).toString().replace(",", "."));
 
-            clsVenta venta = new clsVenta(
-                    numeroVentaGen,
-                    fecha,
-                    dniRuc,
-                    nombreCliente,
-                    codigoProd,
-                    nombreProd,
-                    precioProd,
-                    cantidadProd,
-                    true);
-
-            clsVentaDao.agregar(venta);
+            venta.agregarProducto(codigoProd, nombreProd, precioProd, cantidadProd, descuentoProd);
         }
 
+        // Guardar la venta completa
+        if(ContenedorVentas.agregar(venta)){
         numVenta.setText(numeroVentaGen);
         JOptionPane.showMessageDialog(this, "Venta guardada correctamente\nNúmero: " + numeroVentaGen);
+        }else {
+            JOptionPane.showMessageDialog(null, "no se pudo :c");
+        }
+
+        
     }
 
     private void anularVenta() {

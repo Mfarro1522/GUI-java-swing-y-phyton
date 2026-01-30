@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/CapaPresentacion/jdAniadirProductos.java</file>
             <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/CapaPresentacion/frMenu.java</file>
-            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/CapaLogica/clsProducto.java</file>
+            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/contenedor/ContenedorVentas.java</file>
+            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/capaDatos/clsVentaDao.java</file>
+            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/CapaPresentacion/jdVenta.java</file>
+            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/CapaLogica/clsVenta.java</file>
+            <file>file:/home/mauricio/Documentos/Java/GUI-java-swing-y-phyton/EjerciciosClaseGui/App01/src/CapaPresentacion/ReporteVentas.java</file>
         </group>
     </open-files>
 </project-private>

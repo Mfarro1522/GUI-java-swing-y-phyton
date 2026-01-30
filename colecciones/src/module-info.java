@@ -1,0 +1,3 @@
+module colecciones {
+	exports colecciones;
+}

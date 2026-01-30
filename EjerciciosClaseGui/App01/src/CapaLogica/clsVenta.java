@@ -3,7 +3,6 @@ package CapaLogica;
 import java.time.LocalDate;
 
 /**
- * Clase que representa una Venta
  * 
  * @author mauricio
  */
@@ -11,15 +10,13 @@ public class clsVenta {
 
     private String numeroVenta;
     private LocalDate fecha;
-    
     private String clienteDniRuc;
     private String clienteNombre;
     
-    private String productoCodigo;
-    private String productoNombre;
-    private double productoPrecio;
+    // Array de detalles (productos) de la venta
+    private clsDetalleVenta[] detalles;
+    private int cantidadDetalles;
     
-    private int cantidad;
     private static final double IGV_PORCENTAJE = 0.18;
     private boolean estado;
 
@@ -28,30 +25,94 @@ public class clsVenta {
         this.fecha = LocalDate.now();
         this.clienteDniRuc = "";
         this.clienteNombre = "";
-        this.productoCodigo = "";
-        this.productoNombre = "";
-        this.productoPrecio = 0.0;
-        this.cantidad = 0;
+        this.detalles = new clsDetalleVenta[0];
+        this.cantidadDetalles = 0;
         this.estado = true;
     }
 
-
-    public clsVenta(String numeroVenta, LocalDate fecha, String clienteDniRuc, String clienteNombre,
-            String productoCodigo, String productoNombre, double productoPrecio, int cantidad, boolean estado) {
+    public clsVenta(String numeroVenta, LocalDate fecha, String clienteDniRuc, String clienteNombre, boolean estado) {
         this.numeroVenta = numeroVenta;
         this.fecha = fecha;
         this.clienteDniRuc = clienteDniRuc;
         this.clienteNombre = clienteNombre;
-        this.productoCodigo = productoCodigo;
-        this.productoNombre = productoNombre;
-        this.productoPrecio = productoPrecio;
-        this.cantidad = cantidad;
+        this.detalles = new clsDetalleVenta[0];
+        this.cantidadDetalles = 0;
         this.estado = estado;
     }
 
+    /**
+     * Agregar un producto a la venta
+     */
+    public void agregarProducto(String codigo, String nombre, double precio, int cantidad, double descuento) {
+        clsDetalleVenta detalle = new clsDetalleVenta(codigo, nombre, precio, cantidad, descuento);
+        agregarDetalle(detalle);
+    }
 
+    /**
+     * Agregar un detalle a la venta
+     */
+    public void agregarDetalle(clsDetalleVenta detalle) {
+        clsDetalleVenta[] nuevo = new clsDetalleVenta[cantidadDetalles + 1];
+        for (int i = 0; i < cantidadDetalles; i++) {
+            nuevo[i] = detalles[i];
+        }
+        nuevo[cantidadDetalles] = detalle;
+        detalles = nuevo;
+        cantidadDetalles++;
+    }
+
+    /**
+     * Eliminar un detalle por índice
+     */
+    public boolean eliminarDetalle(int indice) {
+        if (indice < 0 || indice >= cantidadDetalles) {
+            return false;
+        }
+        clsDetalleVenta[] nuevo = new clsDetalleVenta[cantidadDetalles - 1];
+        for (int i = 0; i < indice; i++) {
+            nuevo[i] = detalles[i];
+        }
+        for (int i = indice; i < cantidadDetalles - 1; i++) {
+            nuevo[i] = detalles[i + 1];
+        }
+        detalles = nuevo;
+        cantidadDetalles--;
+        return true;
+    }
+
+    /**
+     * Obtener un detalle por índice
+     */
+    public clsDetalleVenta getDetalle(int indice) {
+        if (indice >= 0 && indice < cantidadDetalles) {
+            return detalles[indice];
+        }
+        return null;
+    }
+
+    /**
+     * Obtener todos los detalles
+     */
+    public clsDetalleVenta[] getDetalles() {
+        return detalles;
+    }
+
+    /**
+     * Obtener cantidad de productos en la venta
+     */
+    public int getCantidadDetalles() {
+        return cantidadDetalles;
+    }
+
+    /**
+     * Calcular subtotal de todos los productos
+     */
     public double calcularSubtotal() {
-        return productoPrecio * cantidad;
+        double subtotal = 0;
+        for (int i = 0; i < cantidadDetalles; i++) {
+            subtotal += detalles[i].calcularSubtotal();
+        }
+        return subtotal;
     }
 
     public double calcularIgv() {
@@ -62,6 +123,7 @@ public class clsVenta {
         return calcularSubtotal() + calcularIgv();
     }
 
+    // Getters y Setters básicos
     public String getNumeroVenta() {
         return numeroVenta;
     }
@@ -94,38 +156,6 @@ public class clsVenta {
         this.clienteNombre = clienteNombre;
     }
 
-    public String getProductoCodigo() {
-        return productoCodigo;
-    }
-
-    public void setProductoCodigo(String productoCodigo) {
-        this.productoCodigo = productoCodigo;
-    }
-
-    public String getProductoNombre() {
-        return productoNombre;
-    }
-
-    public void setProductoNombre(String productoNombre) {
-        this.productoNombre = productoNombre;
-    }
-
-    public double getProductoPrecio() {
-        return productoPrecio;
-    }
-
-    public void setProductoPrecio(double productoPrecio) {
-        this.productoPrecio = productoPrecio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public boolean isEstado() {
         return estado;
     }
@@ -140,14 +170,9 @@ public class clsVenta {
 
     @Override
     public String toString() {
-        return "Venta N°: " + numeroVenta + "\n" +
-                "Fecha: " + fecha + "\n" +
-                "Cliente: " + clienteNombre + " (" + clienteDniRuc + ")\n" +
-                "Producto: " + productoNombre + " (" + productoCodigo + ")\n" +
-                "Cantidad: " + cantidad + "\n" +
-                "Subtotal: S/. " + String.format("%.2f", calcularSubtotal()) + "\n" +
-                "IGV (18%): S/. " + String.format("%.2f", calcularIgv()) + "\n" +
-                "Total: S/. " + String.format("%.2f", calcularTotal()) + "\n" +
-                "Estado: " + (estado ? "Activa" : "Anulada");
+        return "clsVenta{" + "numeroVenta=" + numeroVenta + ", fecha=" + fecha + ", clienteDniRuc=" + clienteDniRuc + ", clienteNombre=" + clienteNombre + ", detalles=" + detalles + ", cantidadDetalles=" + cantidadDetalles + ", estado=" + estado + '}';
     }
+    
+    
+    
 }

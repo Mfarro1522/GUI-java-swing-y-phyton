@@ -17,13 +17,7 @@ public class clsVentaDao {
     public clsVentaDao() {
         cantidad = 0;
     }
-
-    // Generar número de venta automático
-    public static String generarNumeroVenta() {
-        contadorVentas++;
-        return String.format("V%05d", contadorVentas);
-    }
-
+    
     // Agregar una venta
     public static void agregar(clsVenta venta) {
         clsVenta[] nuevoArray = new clsVenta[ventas.length + 1];
@@ -101,14 +95,14 @@ public class clsVentaDao {
     }
 
     // Validar antes de agregar
-    public static boolean validarAgregar(String clienteDniRuc, String productoCodigo, int cantidad) {
-        if (clienteDniRuc == null || clienteDniRuc.trim().isEmpty()) {
+    public static boolean validarAgregar(clsVenta venta) {
+        if (venta == null) {
             return false;
         }
-        if (productoCodigo == null || productoCodigo.trim().isEmpty()) {
+        if (venta.getClienteDniRuc() == null || venta.getClienteDniRuc().trim().isEmpty()) {
             return false;
         }
-        if (cantidad <= 0) {
+        if (venta.getCantidadDetalles() == 0) {
             return false;
         }
         return true;

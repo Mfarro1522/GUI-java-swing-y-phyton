@@ -10,7 +10,7 @@ public class ListaEnlazadaProducto {
         this.cantidad = 0;
     }
 
-    // Clase interna para el nodo
+
     private class NodoProducto {
         clsProducto dato;
         NodoProducto siguiente;
@@ -21,7 +21,7 @@ public class ListaEnlazadaProducto {
         }
     }
 
-    // Agregar producto al final de la lista
+
     public void agregar(clsProducto producto) {
         NodoProducto nuevoNodo = new NodoProducto(producto);
 
@@ -37,7 +37,7 @@ public class ListaEnlazadaProducto {
         cantidad++;
     }
 
-    // Eliminar producto por índice
+
     public boolean eliminar(int indice) {
         if (indice < 0 || indice >= cantidad) {
             return false;
@@ -56,7 +56,7 @@ public class ListaEnlazadaProducto {
         return true;
     }
 
-    // Obtener un producto por índice
+ 
     public clsProducto getElemento(int indice) {
         if (indice < 0 || indice >= cantidad) {
             return null;
@@ -69,12 +69,12 @@ public class ListaEnlazadaProducto {
         return actual.dato;
     }
 
-    // Obtener la cantidad de productos
+
     public int getCantidad() {
         return cantidad;
     }
 
-    // Buscar producto por código
+
     public clsProducto buscarPorCodigo(String codigo) {
         if (codigo == null) {
             return null;
@@ -90,7 +90,7 @@ public class ListaEnlazadaProducto {
         return null;
     }
 
-    // Retorna el índice del producto o -1 si no existe
+
     public int buscarIndicePorCodigo(String codigo) {
         if (codigo == null) {
             return -1;
@@ -108,7 +108,7 @@ public class ListaEnlazadaProducto {
         return -1;
     }
 
-    // Actualizar un producto
+
     public boolean actualizar(String codigoOriginal, clsProducto productoActualizado) {
         int indice = buscarIndicePorCodigo(codigoOriginal);
         if (indice != -1) {
@@ -122,7 +122,7 @@ public class ListaEnlazadaProducto {
         return false;
     }
 
-    // Dar de baja un producto (cambiar estado a false)
+
     public boolean darBaja(String codigo) {
         clsProducto producto = buscarPorCodigo(codigo);
         if (producto != null) {
@@ -132,7 +132,7 @@ public class ListaEnlazadaProducto {
         return false;
     }
 
-    // Validar antes de agregar
+
     public boolean validarAgregar(String codigo, String nombre, double precio) {
         if (codigo == null || codigo.trim().isEmpty()) {
             return false;
@@ -149,7 +149,7 @@ public class ListaEnlazadaProducto {
         return true;
     }
 
-    // Obtener todos los productos como array
+
     public clsProducto[] obtenerTodos() {
         if (cantidad == 0) {
             return new clsProducto[0];
@@ -167,7 +167,7 @@ public class ListaEnlazadaProducto {
         return productos;
     }
 
-    // Limpiar la lista
+
     public void limpiar() {
         inicio = null;
         cantidad = 0;

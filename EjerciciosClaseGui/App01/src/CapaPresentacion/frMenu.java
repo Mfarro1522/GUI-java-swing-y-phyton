@@ -6,14 +6,17 @@ import CapaLogica.clsCategoria;
 import CapaLogica.clsProducto;
 import CapaLogica.clsCliente;
 import CapaLogica.clsVenta;
+
 import capaDatos.clsUsuarioDao;
 import capaDatos.clsMarcaDao;
 import capaDatos.clsCategoriaDao;
 import capaDatos.clsProductoDao;
 import capaDatos.clsClienteDao;
 import capaDatos.clsVentaDao;
-import javax.swing.ImageIcon;
+
 import java.time.LocalDate;
+import javax.swing.ImageIcon;
+
 
 public class frMenu extends javax.swing.JFrame {
 
@@ -45,7 +48,7 @@ public class frMenu extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -70,6 +73,7 @@ public class frMenu extends javax.swing.JFrame {
         menuReporte = new javax.swing.JMenu();
         ItemReporteUsuario = new javax.swing.JMenuItem();
         ReporteUsuariosTipo = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -193,6 +197,14 @@ public class frMenu extends javax.swing.JFrame {
         });
         menuReporte.add(ReporteUsuariosTipo);
 
+        jMenuItem5.setText("Reporte Ventas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        menuReporte.add(jMenuItem5);
+
         barraMenu.add(menuReporte);
 
         setJMenuBar(barraMenu);
@@ -200,14 +212,22 @@ public class frMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 796, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 796, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 487, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 487, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+       ReporteVentas rv = new ReporteVentas(this, true);
+       rv.setLocationRelativeTo(this);
+       rv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
         jdManCliente manCliente = new jdManCliente(this, true);
@@ -290,6 +310,7 @@ public class frMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenu menuMantenimiento;
@@ -379,61 +400,59 @@ public class frMenu extends javax.swing.JFrame {
                 "Av. República 800, Trujillo", true));
     }
 
-    /*public static void cargarVentasEjemplo() {
-        // Ventas de ejemplo
-        clsVentaDao.agregar(new clsVenta(
-                clsVentaDao.generarNumeroVenta(),
+
+    public static void cargarVentasEjemplo() {
+        // Venta 1: Un solo producto
+        clsVenta venta1 = new clsVenta(
+                contenedor.ContenedorVentas.generarNumeroVenta(),
                 LocalDate.now().minusDays(5),
                 "12345678",
                 "JUAN PÉREZ GARCÍA",
-                "P001",
-                "LAPTOP DELL INSPIRON 15",
-                1299.99,
-                1,
-                true));
+                true);
+        venta1.agregarProducto("P001", "LAPTOP DELL INSPIRON 15", 1299.99, 1, 0);
+        contenedor.ContenedorVentas.agregar(venta1);
 
-        clsVentaDao.agregar(new clsVenta(
-                clsVentaDao.generarNumeroVenta(),
+        // Venta 2: Múltiples productos
+        clsVenta venta2 = new clsVenta(
+                contenedor.ContenedorVentas.generarNumeroVenta(),
                 LocalDate.now().minusDays(3),
                 "87654321",
                 "MARÍA LÓPEZ TORRES",
-                "P002",
-                "MOUSE INALÁMBRICO HP",
-                49.99,
-                2,
-                true));
+                true);
+        venta2.agregarProducto("P002", "MOUSE INALÁMBRICO HP", 49.99, 2, 0);
+        venta2.agregarProducto("P003", "MONITOR LENOVO 24 IPS", 249.99, 1, 5);
+        contenedor.ContenedorVentas.agregar(venta2);
 
-        clsVentaDao.agregar(new clsVenta(
-                clsVentaDao.generarNumeroVenta(),
+        // Venta 3: Con descuento
+        clsVenta venta3 = new clsVenta(
+                contenedor.ContenedorVentas.generarNumeroVenta(),
                 LocalDate.now().minusDays(2),
                 "20123456789",
                 "TECH SOLUTIONS S.A.C.",
-                "P003",
-                "MONITOR LENOVO 24 IPS",
-                249.99,
-                3,
-                true));
+                true);
+        venta3.agregarProducto("P003", "MONITOR LENOVO 24 IPS", 249.99, 3, 10);
+        contenedor.ContenedorVentas.agregar(venta3);
 
-        clsVentaDao.agregar(new clsVenta(
-                clsVentaDao.generarNumeroVenta(),
+        // Venta 4: Varios productos
+        clsVenta venta4 = new clsVenta(
+                contenedor.ContenedorVentas.generarNumeroVenta(),
                 LocalDate.now().minusDays(1),
                 "45678912",
                 "CARLOS RODRÍGUEZ SÁNCHEZ",
-                "P004",
-                "DISCO DURO ASUS 1TB",
-                79.99,
-                2,
-                true));
+                true);
+        venta4.agregarProducto("P004", "DISCO DURO ASUS 1TB", 79.99, 2, 0);
+        venta4.agregarProducto("P005", "PROCESADOR AMD RYZEN 5", 199.99, 1, 0);
+        clsVentaDao.agregar(venta4);
 
-        clsVentaDao.agregar(new clsVenta(
-                clsVentaDao.generarNumeroVenta(),
-                LocalDate.now(),
+        // Venta 5: Compra grande
+        clsVenta venta5 = new clsVenta(
+                contenedor.ContenedorVentas.generarNumeroVenta(),
+                LocalDate.now().minusDays(1),
                 "20987654321",
                 "COMERCIAL NORTE E.I.R.L.",
-                "P005",
-                "PROCESADOR AMD RYZEN 5",
-                199.99,
-                5,
-                true));
-    }*/
+                true);
+        venta5.agregarProducto("P005", "PROCESADOR AMD RYZEN 5", 199.99, 5, 15);
+        venta5.agregarProducto("P001", "LAPTOP DELL INSPIRON 15", 1299.99, 2, 10);
+        contenedor.ContenedorVentas.agregar(venta5);
+    }
 }

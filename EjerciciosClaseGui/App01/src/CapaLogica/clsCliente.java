@@ -1,7 +1,6 @@
 package CapaLogica;
 
 /**
- * Clase que representa un Cliente
  * @author mauricio
  */
 public class clsCliente {

@@ -1,7 +1,11 @@
 package CapaLogica;
 
 
-/**** @author mauricio farro*/
+/**
+ * 
+ * @author mauricio farro
+ */
+
 public class clsUsuario {
     private String usuario;
     private String clave;
