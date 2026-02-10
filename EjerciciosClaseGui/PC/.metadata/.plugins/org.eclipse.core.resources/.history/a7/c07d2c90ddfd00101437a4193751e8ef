@@ -1,0 +1,8 @@
+package appGraficos2D01;
+
+public class LinearsRectsOvalosJpanel {
+
+	public static void main(String[] args) {
+		System.out.println("hola");
+	}
+}

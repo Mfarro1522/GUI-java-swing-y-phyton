@@ -1,0 +1,47 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+--release
+17
+-sourcepath
+'/home/mauricio/NetBeansProjects/mavenproject1/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2026. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'mavenproject1 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'mavenproject1 1.0-SNAPSHOT API'
+com.mycompany.mavenproject1
+capaLogica
+capaDatos
+/home/mauricio/NetBeansProjects/mavenproject1/src/main/java = 1768409253682
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/element-list = 1769009701145
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/overview-tree.html = 1769009701166
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/index.html = 1769009701168
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/allclasses-index.html = 1769009701174
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/allpackages-index.html = 1769009701175
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/module-search-index.js = 1769009701175
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/package-search-index.js = 1769009701176
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/type-search-index.js = 1769009701176
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/member-search-index.js = 1769009701176
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/tag-search-index.js = 1769009701176
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/index-all.html = 1769009701182
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/overview-summary.html = 1769009701182
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/help-doc.html = 1769009701184
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/stylesheet.css = 1769009701185
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/script.js = 1769009701185
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/search.js = 1769009701185
+/home/mauricio/NetBeansProjects/mavenproject1/target/reports/apidocs/jquery-ui.overrides.css = 1769009701186

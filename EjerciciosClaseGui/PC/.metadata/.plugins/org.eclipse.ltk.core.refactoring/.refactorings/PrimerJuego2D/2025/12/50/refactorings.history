@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;objetos.obj_llave&apos; to &apos;OBJ_llave&apos;&#x0A;- Original project: &apos;PrimerJuego2D&apos;&#x0A;- Original element: &apos;objetos.obj_llave&apos;&#x0A;- Renamed element: &apos;objetos.OBJ_llave&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;obj_llave&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;objetos{obj_llave.java[obj_llave" matchStrategy="1" name="OBJ_llave" qualified="false" references="true" similarDeclarations="false" stamp="1765571040935" textual="false" version="1.0"/>
+</session>

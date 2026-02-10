@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"capaDatos"},{"l":"capaLogica"},{"l":"com.mycompany.mavenproject1"}];updateSearchResults();

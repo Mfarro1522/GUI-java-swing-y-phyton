@@ -1,0 +1,10 @@
+package appGraficos2D01;
+
+import java.awt.Graphics;
+
+public class LinearsRectsOvalosJpanel {
+
+	public void paintComponent (Graphics g) {
+		super.paintComponent(g);
+	}
+}
